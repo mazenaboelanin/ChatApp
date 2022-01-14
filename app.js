@@ -1,9 +1,21 @@
 const express = require('express');
 const dotenv = require('dotenv').config();
-const app = express();
+const socket = require('socket.io');
 const port = process.env.PORT
 
+
+// App
+const app = express();
+const server = app.listen(port, ()=>{ console.log(`Server is running on ${port}`)});
 // static folder
 app.use(express.static('public'));
 
-app.listen(port, ()=>{ console.log(`Server is running on ${port}`)});
+
+// Socket 
+const io = socket(server);
+
+// listen on connection
+
+io.on('connection', function(socket){
+    console.log('we are heree', socket);
+});
