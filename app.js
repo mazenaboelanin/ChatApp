@@ -23,4 +23,9 @@ io.on('connection', function(socket){
     socket.on('chat', function(data){
         io.sockets.emit('chat', data);
     });
+
+    // Broadcast Message
+    socket.on('typing', function(data){
+        socket.broadcast.emit('typing', data);
+    });
 });
