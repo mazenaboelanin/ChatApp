@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv').config();
-const socket = require('socket.io');
-const port = process.env.PORT
+let socket = require('socket.io');
+const port = process.env.PORT || 4000;
 
 
 // App
@@ -12,10 +12,15 @@ app.use(express.static('public'));
 
 
 // Socket 
-const io = socket(server);
+let io = socket(server);
 
 // listen on connection
 
 io.on('connection', function(socket){
-    console.log('we are heree', socket);
+    console.log('we are heree', socket.id);
+
+    // listen for message and send it back to all sockets
+    socket.on('chat', function(data){
+        io.sockets.emit('chat', data);
+    });
 });
