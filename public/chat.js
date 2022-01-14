@@ -1,4 +1,4 @@
-//const dotenv = require('dotenv').config({path:'../.env'});
+const dotenv = require('dotenv').config({path:'../.env'});
 
 // Create a Connection
-const socket = io.connect(`http://localhost:4000`);
+const socket = io.connect(`http://localhost:${process.env.PORT}`);
